@@ -1,0 +1,144 @@
+<form name="myForm" #myForm="ngForm">
+  <p>
+  <mat-form-field class="example-full-width">
+    <mat-label>תעודת זהות</mat-label>
+    <input type="text" name="cid" [(ngModel)]="client.idNumber" matInput [formControl]="idFormControl"
+      [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />  
+<mat-hint>תעודת הזהות שלי</mat-hint>
+    <mat-error *ngIf="idFormControl.hasError('required')">
+      נא להכניס מספר זהות
+    </mat-error>
+    <mat-error *ngIf="idFormControl.hasError('pattern')||idFormControl.hasError('minlength')">
+      מספר זהות לא תקין
+    </mat-error>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="example-full-width">
+    <mat-label>שם פרטי </mat-label>
+    <input type="text" name="cid" [(ngModel)]="client.firstName" matInput
+      [formControl]="firstNameFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
+    <mat-hint> השם שלי</mat-hint>
+    <mat-error *ngIf="firstNameFormControl.hasError('required')">
+      נא הכנס שם
+    </mat-error>
+
+    <mat-error *ngIf="firstNameFormControl.hasError('pattern')||firstNameFormControl.hasError('minlength')">
+      שם לא תקין
+    </mat-error>
+  </mat-form-field></p>
+ <p>
+    <mat-form-field class="example-full-width">
+    <mat-label>שם משפחה </mat-label>
+    <input type="text" name="cid" [(ngModel)]="client.lastName" matInput
+      [formControl]="lastNameFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
+    <mat-hint> השם שלי</mat-hint>
+    <mat-error *ngIf="lastNameFormControl.hasError('required')">
+      נא הכנס שם
+    </mat-error>
+
+    <mat-error *ngIf="lastNameFormControl.hasError('pattern')||lastNameFormControl.hasError('minlength')">
+      שם לא תקין
+    </mat-error>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepickerFilter]="myFilter" name="pDate" [(ngModel)]="client.birthDate" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</p>
+<p>
+<mat-form-field appearance="fill">
+  <mat-label> מין</mat-label>
+  <mat-select  [(ngModel)]="client.eGender" name="gender">
+    <mat-option >
+    זכר
+    </mat-option>
+    <mat-option >
+      נקבה
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+</p>
+<mat-form-field appearance="fill">
+  <mat-label>קופת חולים</mat-label>
+  <mat-select  [(ngModel)]="client.hmoId" name="hmo">
+    <mat-option value="אחר" ></mat-option>
+    <mat-option *ngFor="let h of hmos" [value]="h.id">
+      {{h.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<section class="example-section">
+  <mat-checkbox class="example-margin"  name="toAdvertise"  [(ngModel)]="client.toAdvertise">  אני מסכים לפרסם את התוכן שמסרתי!</mat-checkbox>
+</section>
+
+<mat-form-field class="example-full-width">
+  <mat-label> ההתרשמות שלי מקופת החולים </mat-label>
+  <input type="text" name="impression" [(ngModel)]="client.myImpression" matInput
+    [formControl]="firstNameFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
+  <mat-hint>  הוספת התרשמות</mat-hint>
+</mat-form-field>
+
+<input type="submit"  (click)="save()" [disabled]="!myForm.valid"/>
+
+ 
+   {{myForm.valid}}
+
+</form>
+<form #myFormChild="ngForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>תעודת זהות</mat-label>
+    <input type="text" name="cid" [(ngModel)]="child.idNumber" matInput [formControl]="idChildFormControl"
+      [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />  
+<mat-hint>תעודת הזהות שלי</mat-hint>
+    <mat-error *ngIf="idChildFormControl.hasError('required')">
+      נא להכניס מספר זהות
+    </mat-error>
+    <mat-error *ngIf="idChildFormControl.hasError('pattern')||idChildFormControl.hasError('minlength')">
+      מספר זהות לא תקין
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>שם </mat-label>
+    <input type="text" name="cid" [(ngModel)]="child.name" required matInput
+      [formControl]="childNameFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
+    <mat-hint> השם שלי</mat-hint>
+    <mat-error *ngIf="childNameFormControl.hasError('required')">
+      נא הכנס שם
+    </mat-error>
+
+    <mat-error *ngIf="childNameFormControl.hasError('pattern')||childNameFormControl.hasError('minlength')">
+      שם לא תקין
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>תאריך לידה </mat-label>
+    <input type="date" name="cid" [(ngModel)]="child.birthDate" required matInput
+      [formControl]="childBirthDateFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
+    <mat-hint> תאריך הלידה שלי</mat-hint>
+    <mat-error *ngIf="childBirthDateFormControl.hasError('required')">
+      נא הכנס תאריך לידה
+    </mat-error> 
+
+     <mat-error *ngIf="childBirthDateFormControl.hasError('pattern')||childBirthDateFormControl.hasError('minlength')">
+            birth date is not valid
+          </mat-error> 
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepickerFilter]="myFilter" name="cDate" [(ngModel)]="child.birthDate" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+   
+</form>
+{{firstDate.getFullYear()}}
+

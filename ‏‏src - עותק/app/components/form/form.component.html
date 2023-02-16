@@ -1,0 +1,27 @@
+<div>
+    <form name="myForm" #myForm="ngForm">
+    <label>תעודת זהות</label>
+    <input type="text" name="id" pattern="[^{1-9}]"  [(ngModel)]="client.Id" #id="ngModel" required />
+    <span *ngIf="id.touched&& id.invalid ">The name is required.</span>
+    <label>שם פרטי</label>
+    <input type="text" name="firstName" [(ngModel)]="client.FirstName" #first="ngModel" required/>
+    <span *ngIf="first.touched&& first.invalid ">The name is required.</span>
+    <label>שם משפחה</label>
+    <input type="text" name="lastName" [(ngModel)]="client.LastName" required/>
+    <label>תאריך לידה</label>
+    <input type="date" name="birthDate" [(ngModel)]="client.BirthDate" required/>
+    <select name="gender" [(ngModel)]="client.Gender" required>
+        <option>זכר</option>
+        <option>נקבה</option>
+    </select>
+    <div>
+        <label>תעודת זהות</label>
+        <input type="text" name="cid" [(ngModel)]="child.Id" required/>
+        <label>שם </label>
+        <input type="text" name="cname" [(ngModel)]="child.Name" required/>
+        <label>תאריך לידה</label>
+        <input type="date" name="cBirthDate" [(ngModel)]="child.BirthDate" required/>
+        <input type="button" value="הוסף ילד" (click)="addChild()"/>
+    </div>
+</form>
+</div>
