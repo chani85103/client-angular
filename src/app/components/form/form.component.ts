@@ -52,7 +52,6 @@ export class FormComponent implements OnInit, OnDestroy {
     })
     this.client = this.formDataService.getClient();
     this.child = this.formDataService.getChild();
-    // this.children=this.formDataService.getChildren();
   }
   addChild() {
     console.log("child");
@@ -70,7 +69,6 @@ export class FormComponent implements OnInit, OnDestroy {
     else {
       this.store()
       console.log("saving");
-      // this.formDataService.saveChildren(this.children);
       this.formDataService.sendClientToServer()
     }
   }

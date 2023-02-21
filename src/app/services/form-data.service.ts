@@ -37,7 +37,6 @@ export class FormDataService {
   sendClientToServer() {
     console.log(this.client)
     return this.http.post<Client>(`${environment.baseUrl}/Client`, this.client).subscribe(s => {
-      console.log(s)
       let es: Client[] = [];
       es.push(s)
       const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(es);
@@ -50,19 +49,6 @@ export class FormDataService {
       XLSX.writeFile(wb, "f" + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
   }
-  // public exportAsExcelFile(json: any, excelFileName: string): void {
-  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-  //   const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-  //   this.saveAsExcelFile(excelBuffer, excelFileName);
-  // }
-
-  // private saveAsExcelFile(buffer: any, fileName: string): void {
-  //   const data: Blob = new Blob([buffer], {
-  //     type: EXCEL_TYPE
-  //   });
-  //   FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-  // }
   reset() {
     this.client = new ClientModel("", "", "", null, false, 2, 0, "", []);
     this.child = new ChildModel("", "", new Date());
