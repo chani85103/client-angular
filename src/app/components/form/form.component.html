@@ -45,7 +45,7 @@
 <p>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepickerFilter]="myFilter" name="pDate" [(ngModel)]="client.birthDate" [matDatepicker]="picker">
+    <input matInput [matDatepickerFilter]="myFilter" [formControl]="birthDateFormControl" [errorStateMatcher]="matcher" name="pDate" [(ngModel)]="client.birthDate" [matDatepicker]="picker">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
@@ -54,16 +54,17 @@
 <p>
 <mat-form-field appearance="fill">
   <mat-label> מין</mat-label>
-  <mat-select  [(ngModel)]="client.eGender" name="gender">
-    <mat-option >
-    זכר
+  <mat-select  [(ngModel)]="client.Gender" name="gender">
+    <mat-option value="0">
+  זכר
     </mat-option>
-    <mat-option >
+    <mat-option value="1">
       נקבה
       </mat-option>
   </mat-select>
 </mat-form-field>
 </p>
+<p>
 <mat-form-field appearance="fill">
   <mat-label>קופת חולים</mat-label>
   <mat-select  [(ngModel)]="client.hmoId" name="hmo">
@@ -73,24 +74,25 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-
+</p>
+<p>
 <section class="example-section">
   <mat-checkbox class="example-margin"  name="toAdvertise"  [(ngModel)]="client.toAdvertise">  אני מסכים לפרסם את התוכן שמסרתי!</mat-checkbox>
 </section>
 
+<p>
 <mat-form-field class="example-full-width">
   <mat-label> ההתרשמות שלי מקופת החולים </mat-label>
   <input type="text" name="impression" [(ngModel)]="client.myImpression" matInput
     [formControl]="firstNameFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
   <mat-hint>  הוספת התרשמות</mat-hint>
 </mat-form-field>
-
-<input type="submit"  (click)="save()" [disabled]="!myForm.valid"/>
-
- 
-   {{myForm.valid}}
-
+</p>
+<p>
+<input type="submit" id="but"  id="but"  (click)="save()" [disabled]="!checkIfValidForm()"/>
+</p>
 </form>
+<h4>הילדים שלי:</h4>
 <form #myFormChild="ngForm">
   <mat-form-field class="example-full-width">
     <mat-label>תעודת זהות</mat-label>
@@ -118,27 +120,13 @@
       שם לא תקין
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>תאריך לידה </mat-label>
-    <input type="date" name="cid" [(ngModel)]="child.birthDate" required matInput
-      [formControl]="childBirthDateFormControl" [errorStateMatcher]="matcher" placeholder="xxxxxxxxx" />
-    <mat-hint> תאריך הלידה שלי</mat-hint>
-    <mat-error *ngIf="childBirthDateFormControl.hasError('required')">
-      נא הכנס תאריך לידה
-    </mat-error> 
-
-     <mat-error *ngIf="childBirthDateFormControl.hasError('pattern')||childBirthDateFormControl.hasError('minlength')">
-            birth date is not valid
-          </mat-error> 
-  </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepickerFilter]="myFilter" name="cDate" [(ngModel)]="child.birthDate" [matDatepicker]="picker">
+    <mat-label>בחר תאריך</mat-label>
+    <input matInput [matDatepickerFilter]="myFilter" [formControl]="childBirthDateFormControl" [errorStateMatcher]="matcher" name="cDate" [(ngModel)]="child.birthDate" [matDatepicker]="pickerChild">
     <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerChild"></mat-datepicker-toggle>
+    <mat-datepicker #pickerChild></mat-datepicker>
   </mat-form-field>
-   
+  <p>
+   <input type="submit"  (click)="addChild()" id="but" [disabled]="!checkIfValidChild()" value="הוסף ילד"/>
 </form>
-{{firstDate.getFullYear()}}
-

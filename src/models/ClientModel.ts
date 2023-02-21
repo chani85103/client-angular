@@ -1,11 +1,6 @@
 
 import ChildModel from "./ChildModel";
-import { HmoModel } from "./HmoModel";
 
-enum EGenderDTO {
-    Male = 0,
-    Female = 1,
-  }
 export default class ClientModel{
   //  public string Id { get; set; } = string.Empty;
   //       public string FirstName { get; set; } = string.Empty;
@@ -23,5 +18,5 @@ export default class ClientModel{
   // "eGender": 0,
   // "hmoId":1,
   // "myImpression": "string"
-    constructor(public idNumber:string,public firstName:string,public lastName:string,public birthDate:Date,public toAdvertise:boolean,public eGender:number,public hmoId:number,public myImpression:string,public children:ChildModel[]){}
+    constructor(public idNumber:string,public firstName:string,public lastName:string,public birthDate:Date,public toAdvertise:boolean,public Gender:number,public hmoId:number,public myImpression:string,public children:ChildModel[]){}
 }

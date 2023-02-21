@@ -1,5 +1,8 @@
-import Child from "./Child";
-
+import ChildDTO from "./ChildDTO";
+enum EGenderDTO {
+    Male = 0,
+    Female = 1,
+  }
 export default class Client{
-    constructor(public Id:string,public FirstName:string,public LastName:string,public BirthDate:Date,public Gender:string,public HMO:string){}
+    constructor(public id:number,public idNumber:string,public firstName:string,public lastName:string,public birthDate:Date,public toAdvertise:boolean,public eGender:EGenderDTO,public hmoId:number,public myImpression:string,public children:ChildDTO[]){}
 }

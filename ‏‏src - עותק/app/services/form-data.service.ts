@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Child from 'src/models/Child';
+import Child from 'src/models/ChildDTO';
 import Client from 'src/models/Client';
 
 @Injectable({

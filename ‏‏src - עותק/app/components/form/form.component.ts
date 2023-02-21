@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService } from 'src/app/services/form-data.service';
-import Child from 'src/models/Child';
+import Child from 'src/models/ChildDTO';
 import Client from 'src/models/Client';
 
 @Component({
